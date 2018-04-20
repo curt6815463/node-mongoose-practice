@@ -4,8 +4,7 @@ var Schema = mongoose.Schema
 
 // create a schema
 var userSchema = new Schema({
-  name: String,
-  username: { type: String, required: true, unique: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
   admin: Boolean,
   location: String,
@@ -36,7 +35,6 @@ userSchema.pre('save', function(next) {
   // if created_at doesn't exist, add to that field
   if (!this.created_at)
     this.created_at = currentDate
-
   next()
 })
 

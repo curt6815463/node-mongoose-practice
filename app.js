@@ -11,6 +11,7 @@ var users = require('./routes/users');
 
 var app = express();
 var dbUrl = "mongodb://127.0.0.1:27017"
+mongoose.connect(dbUrl);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

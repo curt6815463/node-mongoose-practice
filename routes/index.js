@@ -1,18 +1,11 @@
 var express = require('express')
 var router = express.Router()
 
+var users = require('../controller/users')
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(res.body);
   res.render('index', { title: 'Express' })
 })
 
-router.post('/', function(req, res, next) {
-  console.log(req.body);
-  var user = {
-    name:req.body.a,
-    date:req.body.b
-  }
-  res.json(user)
-})
+router.post('/', users)
 module.exports = router
