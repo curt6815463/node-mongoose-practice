@@ -28,6 +28,29 @@ var user = {
       }
     })
   },
+  findUserById:function (req, res, next) {
+    // get a user with ID of 1
+    userModel.findById('5ad896074b39e039f8c4297e', function(err, user) {
+      if (err) throw err;
+
+      // // change the users location
+      // user.location = 'uk';
+
+      // save the user
+      // user.save(function(err) {
+      //   if (err) throw err;
+      //
+      //   console.log('User successfully updated!');
+      // });
+      res.json(user)
+    });
+  },
+  findUser:function (req, res, next) {
+    userModel.find({ username: `${req.params.username}` }, function(err, user) {
+      if (err) throw err;
+      res.json(user)
+    });
+  },
   findAllUser:function (req, res, next) {
     // get all the users
     userModel.find({}, function(err, users) {
@@ -43,7 +66,6 @@ var user = {
           users
         })
       }
-
     });
   }
 }
