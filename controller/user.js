@@ -1,7 +1,9 @@
 var userModel = require('../model/user')
+var jwt = require('jsonwebtoken')
+
 var user = {
   createUser:function (req, res, next) {
-    var newUser = userModel({
+    var newUser = {
       username: req.body.username,
       password: req.body.password,
       admin: req.body.admin,
@@ -12,8 +14,8 @@ var user = {
       },
       created_at: req.body.created_at,
       updated_at: req.body.updated_at
-    })
-    newUser.save(function (err) {
+    }
+    userModel(newUser).save(function (err) {
       if(err){
         res.status(400)
         res.json({
@@ -23,7 +25,8 @@ var user = {
       }
       else {
         res.json({
-          response:"create success"
+          response:"create success",
+          token:jwt.sign(newUser,"curtIsHandsome")
         })
       }
     })
